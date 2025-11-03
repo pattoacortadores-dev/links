@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PatoModzX</title>
+
+  <!-- Tailwind (prototipo rápido) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Tipografía -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- Lucide (iconos minimalistas) -->
+  <script src="https://unpkg.com/lucide@latest/dist/lucide.min.js"></script>
+
+  <style>
+    :root{
+      --bg: #000;
+      --card: rgba(255,255,255,0.02);
+      --card-border: rgba(255,255,255,0.1);
+      --accent-shadow: rgba(255,255,255,0.08);
+    }
+
+    html,body{height:100%;margin:0;font-family:'Poppins',sans-serif;background:var(--bg);color:#fff;overflow-x:hidden}
+    body{animation:fadeIn .9s ease both}
+
+    @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+    /* Logo circular flotante */
+    .logo{
+      width:120px;height:120px;border-radius:50%;object-fit:cover;display:block;margin:0 auto;
+      border:2px solid rgba(255,255,255,0.12);
+      box-shadow:0 6px 18px rgba(255,255,255,0.06);
+      transition:transform .6s ease,box-shadow .6s ease;
+      animation:floatLogo 4s ease-in-out infinite;
+    }
+    @keyframes floatLogo{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+    .logo:hover{transform:scale(1.04);box-shadow:0 10px 26px rgba(255,255,255,0.12)}
+
+    /* Tarjetas */
+    .card{
+      background:var(--card);border:1px solid var(--card-border);
+      border-radius:1.1rem;padding:1.2rem;backdrop-filter:blur(10px);
+      transition:all .36s ease;box-shadow:0 6px 18px var(--accent-shadow);
+    }
+    .card:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(255,255,255,0.06);background:rgba(255,255,255,0.035)}
+
+    /* Icono dentro de la tarjeta */
+    .icono{
+      width:72px;height:72px;margin:0 auto;border-radius:.9rem;object-fit:cover;
+      filter:drop-shadow(0 6px 18px rgba(255,255,255,0.06));
+      transition:transform .5s ease,filter .5s ease;
+      animation:iconFloat 5s ease-in-out infinite;
+    }
+    @keyframes iconFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+    .icono:hover{transform:scale(1.04);filter:drop-shadow(0 10px 28px rgba(255,255,255,0.09))}
+
+    /* Botón elegante negro (inline-flex centrado) */
+    .boton{
+      display:inline-flex;align-items:center;justify-content:center;gap:.6rem;
+      padding:.68rem 1.25rem;border-radius:9999px;border:1px solid #fff;
+      background:#000;color:#fff;font-weight:600;cursor:pointer;position:relative;overflow:hidden;
+      transition:transform .22s ease,box-shadow .22s ease,background .22s ease,color .22s ease;
+      text-decoration:none;font-size:0.95rem;
+      /* evitar que ocupe todo el ancho por defecto */
+      width: auto;
+    }
+
+    .boton .btn-text{display:inline-block;line-height:1}
+    .boton svg{width:18px;height:18px;flex:0 0 18px;opacity:.95}
+
+    /* barra de brillo al pasar */
+    .boton::before{
+      content:"";position:absolute;left:-120%;top:0;height:100%;width:40%;
+      background:linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+      transform:skewX(-12deg);transition:all .6s ease;
+      pointer-events:none;
+    }
+    .boton:hover::before{left:140%}
+
+    /* hover/invert */
+    .boton:hover{background:#fff;color:#000;box-shadow:0 6px 22px rgba(255,255,255,0.08);transform:translateY(-2px)}
+    .boton:active{transform:scale(.98)}
+
+    /* asegurar que el botón quede centrado en la card */
+    .card-actions{display:flex;justify-content:center;margin-top:.6rem}
+
+    /* texto y espaciado */
+    h1{font-size:1.6rem;margin:0 0 .2rem;font-weight:600;letter-spacing:.2px}
+    .subtitle{color:rgba(255,255,255,0.65);font-size:.9rem;margin-bottom:.6rem}
+
+    /* bloqueador PC (responsive) */
+    #no-pc{display:none;position:fixed;inset:0;background:#000;z-index:9999;color:#fff;align-items:center;justify-content:center;text-align:center;padding:2rem}
+    @media(min-width:768px){#main-content{display:none}#no-pc{display:flex}}
+
+    /* responsive container width */
+    .container{max-width:420px;margin:0 auto;padding:1rem}
+  </style>
+</head>
+<body>
+  <!-- Mensaje si abren en PC -->
+  <div id="no-pc">
+    <div>
+      <p style="font-size:1.1rem;margin-bottom:.6rem">🚫 Esta página está diseñada solo para móviles</p>
+      <p style="opacity:.7;font-size:.95rem">Abre este enlace en tu teléfono o continúa bajo tu propio riesgo.</p>
+    </div>
+  </div>
+
+  <main id="main-content" class="container">
+    <!-- Logo -->
+    <img src="Sin titulo.jpg" alt="Logo PatoModzX" class="logo" />
+
+    <!-- Título -->
+    <div style="text-align:center;margin-top:12px;margin-bottom:6px">
+      <h1>PatoModzX</h1>
+      <div class="subtitle">Selecciona un método de descarga</div>
+    </div>
+
+    <!-- Cards -->
+    <div style="display:grid;gap:14px">
+      <!-- LootLabs -->
+      <section class="card">
+        <img src="FOm7QFnK_400x400.jpg" alt="LootLabs" class="icono" />
+        <div style="text-align:center;margin-top:.6rem">
+          <div style="font-weight:600">LootLabs</div>
+          <div style="font-size:.85rem;color:rgba(255,255,255,0.65);margin-top:4px">Descarga vía LootLabs</div>
+        </div>
+        <div class="card-actions">
+          <!-- botón centrado, inline-flex para icon + texto -->
+          <button type="button" class="boton" onclick="goTo('https://lootlabs.io')">
+            <!-- icono lucide (se reemplazará por SVG) -->
+            <i data-lucide="download"></i>
+            <span class="btn-text">Descargar</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Work.ink -->
+      <section class="card">
+        <img src="images.png" alt="Work.ink" class="icono" />
+        <div style="text-align:center;margin-top:.6rem">
+          <div style="font-weight:600">Work.ink</div>
+          <div style="font-size:.85rem;color:rgba(255,255,255,0.65);margin-top:4px">Descarga vía Work.ink</div>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="boton" onclick="goTo('https://work.ink')">
+            <i data-lucide="download"></i>
+            <span class="btn-text">Descargar</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Cuty.io -->
+      <section class="card">
+        <img src="og-image.png" alt="Cuty.io" class="icono" />
+        <div style="text-align:center;margin-top:.6rem">
+          <div style="font-weight:600">Cuty.io</div>
+          <div style="font-size:.85rem;color:rgba(255,255,255,0.65);margin-top:4px">Descarga vía Cuty.io</div>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="boton" onclick="goTo('https://cuty.io')">
+            <i data-lucide="download"></i>
+            <span class="btn-text">Descargar</span>
+          </button>
+        </div>
+      </section>
+    </div>
+
+  </main>
+
+  <script>
+    // Inicializar lucide después de que el DOM esté listo
+    document.addEventListener('DOMContentLoaded', function(){
+      try{
+        // crea los SVGs a partir de los <i data-lucide="...">
+        lucide.createIcons();
+
+        // Ajustar tamaño de los SVG dentro de botones para evitar desalineos
+        document.querySelectorAll('.boton svg').forEach(svg => {
+          svg.setAttribute('width','18');
+          svg.setAttribute('height','18');
+          svg.style.display = 'inline-block';
+          svg.style.verticalAlign = 'middle';
+          svg.style.marginRight = '6px';
+        });
+
+      }catch(e){
+        console.warn('lucide no pudo inicializarse:', e);
+      }
+    });
+
+    // Redirección con un pequeño debounce y animación de presión
+    function goTo(url){
+      // efecto visual rápido (presionar)
+      const btn = event.currentTarget;
+      if(btn){
+        btn.style.transform = 'scale(.98)';
+        setTimeout(()=>{ btn.style.transform = ''; },160);
+      }
+      // Redirigir
+      window.location.href = url;
+    }
+  </script>
+</body>
+</html>
